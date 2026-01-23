@@ -1,8 +1,8 @@
-# Circulation Simulation
+## Circulation Simulation
 
 ![3D plot](./pics/MIT3Dskip_deseasoned.gif) 
 
-Introduction
+# Introduction
 
 This study establishes a high-resolution numerical simulation for the Pacific Ocean and its adjacent marginal seas, including the South China Sea and the Indonesian seas, using the Massachusetts Institute of Technology general circulation model (MITgcm). 
 
