@@ -1,0 +1,234 @@
+#
+# *********************
+# External Forcing Data
+# *********************
+ &EXF_NML_01
+#
+ useExfCheckRange  = .FALSE.,
+# repeatPeriod      = 31104000,
+ useEXFYearlyFields= .FALSE.,
+ exf_iprec         = 32,
+ exf_verbose       = .FALSE.,
+ useAtmWind        = .TRUE.,
+#
+ &
+
+# *********************
+ &EXF_NML_02
+#
+ uwindstartdate1  = 19930101,
+ uwindstartdate2  = 000000,
+ uwindperiod      = 10800,
+ uwindfile        = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/EXF/uwnd_ncep_1993-2022.bin12',
+#
+ vwindstartdate1  = 19930101,
+ vwindstartdate2  = 000000,
+ vwindperiod      = 10800,
+ vwindfile        = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/EXF/vwnd_ncep_1993-2022.bin12',
+#
+ lwfluxstartdate1  = 19930101,
+ lwfluxstartdate2  = 000000,
+ lwfluxperiod      = 10800,
+ lwfluxfile        = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/EXF/nlwrs_ncep_1993-2022.bin12',
+#
+ swfluxstartdate1  = 19930101,
+ swfluxstartdate2  = 000000,
+ swfluxperiod      = 10800,
+ swfluxfile        = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/EXF/nswrs_ncep_1993-2022.bin12',
+#
+ precipstartdate1   = 19930101,
+ precipstartdate2   = 000000,
+ precipperiod       = 10800,
+ precipfile         = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/EXF/prt_ncep_1993-2022.bin12',
+#
+# precipstartdate1  = 20000101,
+# precipstartdate1  = 000000,
+# precipperiod  = 2592000,
+# precipfile  = 'EmP_ind.bin12',
+#
+# runoffstartdate1   = 19930101,
+# runoffstartdate2   = 000000,
+# runoffperiod       = 864000,
+# runofffile         = '../input/EXF/output_data/ro_ncep_1993-2022.bin12',
+#
+ atempstartdate1   = 19930101,
+ atempstartdate2   = 000000,
+ atempperiod       = 10800,
+ atempfile         = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/EXF/atemp_ncep_1993-2022.bin12',
+#
+ aqhstartdate1     = 19930101,
+ aqhstartdate2     = 000000,
+ aqhperiod         = 10800,
+ aqhfile           = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/EXF/shum_ncep_1993-2022.bin12',
+#
+# climsststartdate1  = 20000101,
+# climsststartdate2  = 000000,
+# climsstperiod      = -12,
+# climsstTauRelax    = 1728000,
+# climsstfile        = '../input/EXF/output_data/restore_t_0410_WOA.bin12',
+#
+# climsssstartdate1  = 20000101,
+# climsssstartdate2  = 000000,
+# climsssperiod      = -12,
+# climsssTauRelax    = 2592000,
+# climsssfile        = '../input/EXF/output_data/restore_s_0410_WOA.bin12',
+#
+ &
+
+# *********************
+ &EXF_NML_03
+ &
+
+# *********************
+ &EXF_NML_04
+  
+# uwind_lon0     = 86.0
+# uwind_lon_inc  = 1.0
+# uwind_lat0     = -25.0
+# uwind_lat_inc  = 51*1.0
+# uwind_nlon     = 82
+# uwind_nlat     = 52
+
+# vwind_lon0     = 86.0
+# vwind_lon_inc  = 1.0 
+# vwind_lat0     = -25.0
+# vwind_lat_inc  = 51*1.0 
+# vwind_nlon     = 82
+# vwind_nlat     = 52
+
+# lwflux_lon0     = 86.0
+# lwflux_lon_inc  = 1.0 
+# lwflux_lat0     = -25.0
+# lwflux_lat_inc  = 51*1.0 
+# lwflux_nlon     = 82
+# lwflux_nlat     = 52
+
+# swflux_lon0     = 86.0
+# swflux_lon_inc  = 1.0
+# swflux_lat0     = -25.0
+# swflux_lat_inc  = 51*1.0
+# swflux_nlon     = 82
+# swflux_nlat     = 52
+
+# atemp_lon0     = 86.0
+# atemp_lon_inc  = 1.0
+# atemp_lat0     = -25.0
+# atemp_lat_inc  = 51*1.0
+# atemp_nlon     = 82
+# atemp_nlat     = 52
+
+# aqh_lon0     = 86.0
+# aqh_lon_inc  = 1.0
+# aqh_lat0     = -25.0
+# aqh_lat_inc  = 51*1.0
+# aqh_nlon     = 82
+# aqh_nlat     = 52
+
+# precip_lon0     = 86.0
+# precip_lon_inc  = 1.0 
+# precip_lat0     = -25.0
+# precip_lat_inc  = 51*1.0
+# precip_nlon     = 82
+# precip_nlat     = 52
+
+# runoff_lon0     = -179.75
+# runoff_lon_inc  = 0.5 
+# runoff_lat0     = -54.75
+# runoff_lat_inc  = 276*0.5
+# runoff_nlon     = 720 
+# runoff_nlat     = 277 
+
+# runoff_lon0     = -180
+# runoff_lon_inc  = 0.5
+# runoff_lat0     = -55
+# runoff_lat_inc  = 276*0.5
+# runoff_nlon     = 720
+# runoff_nlat     = 277
+
+
+#
+# ustress_lon0      = 95.25D0,
+# ustress_lon_inc   = 0.5D0,
+# ustress_lat0      = -0.25D0,
+# ustress_lat_inc   = 75*0.5
+# ustress_nlon      = 96,
+# ustress_nlat      = 76,
+#
+# vstress_lon0      = 95.25D0,
+# vstress_lon_inc   = 0.5D0,
+# vstress_lat0      = -0.25D0,
+# vstress_lat_inc   = 75*0.5
+# vstress_nlon      = 96,
+# vstress_nlat      = 76,
+#
+# hflux_lon0        = 90.0,
+# hflux_lon_inc     = 1.875,
+# hflux_lat0        = -10.476,
+# hflux_lat_inc     = 1.9046898, 1.9047399, 1.9047303, 1.9047399,
+#                     1.9047320, 1.9047360, 1.9047320, 1.9047399,
+#		     1.9047303, 1.9047399, 1.9046898, 1.9048004,
+#		     1.9046993, 1.9047012, 1.9047985, 1.9047012,
+#		     1.9046993, 1.9048004, 1.9046993, 1.9047012,
+#		     1.9047985, 1.9047012, 1.9047012, 1.9046974,
+#		     1.9047012, 1.9048004, 1.9046974, 1.9047012,
+#		     1.9047012, 1.9046974, 1.9047012, 1.9047012,
+# hflux_nlon        = 33,
+# hflux_nlat        = 33,
+#
+# swflux_lon0       = 90.0,
+# swflux_lon_inc    = 1.875,
+# swflux_lat0       = -10.476,
+# swflux_lat_inc    = 1.9046898, 1.9047399, 1.9047303, 1.9047399,
+#                     1.9047320, 1.9047360, 1.9047320, 1.9047399,
+#		     1.9047303, 1.9047399, 1.9046898, 1.9048004,
+#		     1.9046993, 1.9047012, 1.9047985, 1.9047012,
+#		     1.9046993, 1.9048004, 1.9046993, 1.9047012,
+#		     1.9047985, 1.9047012, 1.9047012, 1.9046974,
+#		     1.9047012, 1.9048004, 1.9046974, 1.9047012,
+#		     1.9047012, 1.9046974, 1.9047012, 1.9047012,
+# swflux_nlon       = 33,
+# swflux_nlat       = 33,
+#
+# sflux_lon0        = 95.25D0,
+# sflux_lon_inc     = 0.5D0,
+# sflux_lat0        = -0.25D0,
+# sflux_lat_inc     = 75*0.5
+# sflux_nlon        = 96,
+# sflux_nlat        = 76,
+#
+# climsst_lon0        = 95.25D0,
+# climsst_lon_inc     = 0.5D0,
+# climsst_lat0        = -0.25D0,
+# climsst_lat_inc     = 75*0.5
+# climsst_nlon        = 96,
+# climsst_nlat        = 76,
+#
+# climsss_lon0        = 95.25D0,
+# climsss_lon_inc     = 0.5D0,
+# climsss_lat0        = -0.25D0,
+# climsss_lat_inc     = 75*0.5
+# climsss_nlon        = 96,
+# climsss_nlat        = 76,
+#
+ &
+
+# *****************************
+ &EXF_NML_OBCS
+#
+ obcsEstartdate1   = 19930101,
+ obcsEstartdate2   = 000000,
+ obcsEperiod       = 432000.0,
+#
+ obcsWstartdate1   = 19930101,
+ obcsWstartdate2   = 000000,
+ obcsWperiod       = 432000.0,
+#
+ obcsNstartdate1   = 19930101,
+ obcsNstartdate2   = 000000,
+ obcsNperiod       = 432000.0,
+#
+ obcsSstartdate1   = 19930101,
+ obcsSstartdate2   = 000000,
+ obcsSperiod       = 432000.0,
+ &
+

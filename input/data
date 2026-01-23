@@ -1,0 +1,146 @@
+# ====================
+# | Model parameters |
+# ====================
+#
+# Continuous equation parameters
+#
+#   tRef            - Reference vertical potential temperature          (deg C)
+#   sRef            - Reference vertical salinity                         (PSU)
+#   viscAh          - Horizontal eddy viscosity coefficient             (m^2/s)
+#   viscAz          - Vertical eddy viscosity coefficient               (m^2/s)
+#   diffKhT         - Horizontal temperature diffusivity                (m^2/s)
+#   diffKrT         - Vertical temperature diffusivity                  (m^2/s)
+#   diffKhS         - Horizontal salt diffusivity                       (m^2/s)
+#   diffKrS         - Vertical salt diffusivity                         (m^2/s)
+#   gravity         - Acceleration due to gravity                       (m/s^2)
+#   rigidLid        - Set to true to use rigid lid
+#   implicitFreeSurface - Set to true to use implicit free surface
+#   eosType         - Flag for linear or polynomial equation of state
+#   momAdvection    - On/Off flag for momentum self transport
+#   momViscosity    - On/Off flag for momentum mixing
+#
+ &PARM01
+ viscAh=200.0,
+# viscA4=1.E11,
+# viscC2Smag=1.0,
+ viscC2Leith=1.0,
+ diffKhT=1.E0,
+ diffKhS=1.E0,
+ viscAr=1.E-4,
+ diffKrT=1.E-5,
+ diffKrS=1.E-5,
+ no_slip_sides=.FALSE.,
+# sideDragFactor=10.E0,
+ no_slip_bottom=.TRUE.,
+ vectorInvariantMomentum=.TRUE.,
+# hFacMin=0.3,
+# hFacMinDr=5.0,
+ bottomDragLinear=0.0025,
+ rigidLid=.FALSE.,
+ implicitFreeSurface=.TRUE.,
+ eosType='JMD95Z',
+ exactConserv=.TRUE.,
+ readBinaryPrec=32,
+ writeBinaryPrec=32,
+ useRealFreshWaterFlux=.TRUE.,
+ implicitDiffusion=.TRUE.,
+ implicitViscosity=.TRUE.,
+ tempAdvScheme=33,
+ saltAdvScheme=33,
+ multiDimAdvection=.TRUE.,
+ staggerTimeStep=.TRUE.,
+ debugLevel=-1,
+#- set wrong celsius2K to reproduce old results:
+# celsius2K=273.16,
+# HeatCapacity_Cp = 3986.D0,
+# gravity         = 9.8156,
+# rhoConst        = 1027.D0,
+# rhoConstFresh   = 999.8,
+ allowFreezing=.FALSE.,
+ useSingleCpuIO=.TRUE.,
+ &
+
+# Elliptic solver parameters
+#
+#   cg2dMaxIters       - Maximum number of 2d solver iterations
+#   cg2dTargetResidual - Solver target residual
+#
+ &PARM02
+ cg2dMaxIters=1000,
+ cg2dTargetResidual=1E-13,
+ cg3dMaxIters=400,
+ cg3dTargetResidual=1.E-13,
+ &
+
+# Time stepping parameters
+#
+#   startTime         - Integration starting time                (s)
+#   endTime           - Integration ending time                  (s)
+#   tauCD             - CD scheme coupling timescale             (s)
+#   deltaTMom         - Timestep for momemtum equations          (s)
+#   deltaTtracer      - Tracer timestep                          (s)
+#   deltaTClock       - Timestep used as model "clock"           (s)
+#   abEps             - Adams-Bashforth stabilising factor
+#   pChkPtFreq        - Frequency of permanent check pointing    (s)
+#   chkPtFreq         - Frequency of rolling check pointing      (s)
+#   dumpFreq          - Frequency at which model state is stored (s)
+#   tauThetaClimRelax - Relaxation to climatology time scale     (s)
+#   tauSaltClimRelax  - Relaxation to climatology time scale     (s)
+#
+ &PARM03
+ baseTime=0.,
+ startTime=0.,
+# nIter0=2695680,
+# endTime=3110400000.,
+ endTime=93312000.,
+ deltaTmom=300.0,
+ deltaTtracer=300.0,
+ deltaTClock =300.0,
+# cAdjFreq=0.,
+ abEps=0.1,
+# forcing_In_AB = .FALSE.,
+# dumpInitAndLast=.TRUE.,
+ pChkptFreq=31104000.,
+# chkptFreq= 1200.,
+ dumpFreq = 31104000.,
+# taveFreq = 0.,
+ monitorFreq=86400.,
+# pickupStrictlyMatch=.FALSE.,
+ &
+
+# Gridding parameters
+#
+#   usingSphericalPolarGrid - On/Off flag for spherical polar coordinates
+#   delX                    - Zonal grid spacing         (degrees)
+#   delY                    - Meridional grid spacing    (degrees)
+#   delZ                    - Vertical grid spacing      (m)
+#   ygOrigin                - Southern boundary latitude (degrees)
+#
+ &PARM04
+ usingSphericalPolarGrid=.TRUE.,
+ dxSpacing=0.08333,
+ dySpacing=0.08333,
+ delRFile='/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/TER/drfile35_Pac.bin12',
+ ygOrigin=-20.0,
+ xgOrigin=100.0,
+ rSphere = 6371200,
+ &
+
+# Input datasets
+#
+#   bathyFile       - File containing bathymetry
+#   hydrogThetaFile - File containing initial potential temperature data
+#   hydrogSaltFile  - File containing initial salinity data
+#   zonalWindFile   - File containing zonal wind data
+#   meridWindFile   - File containing meridional wind data
+#   thetaClimFile   - File containing theta climatology used for relaxation
+#   saltClimFile    - File containing salt climatology used for relaxation
+#
+ &PARM05
+ bathyFile       = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/TER/topog_Pac.bin12',
+ hydrogThetaFile = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/INI/t_ini_glorys12v1_mean_1993_2002.bin12',
+ hydrogSaltFile  = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/INI/s_ini_glorys12v1_mean_1993_2002.bin12',
+ uVelInitFile    = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/INI/u_ini_glorys12v1_mean_1993_2002.bin12',
+ vVelInitFile    = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/INI/v_ini_glorys12v1_mean_1993_2002.bin12',
+# diffKrFile      = 'Kv_3D_YC_frc_tide.bin12',
+ & 

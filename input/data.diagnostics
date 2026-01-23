@@ -1,0 +1,86 @@
+# Diagnostic Package Choices
+#--------------------
+#  dumpAtLast (logical): always write output at the end of simulation (default=F)
+#  diag_mnc   (logical): write to NetCDF files (default=useMNC)
+#--for each output-stream:
+#  fileName(n) : prefix of the output file name (max 80c long) for outp.stream n
+#  frequency(n):< 0 : write snap-shot output every |frequency| seconds
+#               > 0 : write time-average output every frequency seconds
+#  timePhase(n)     : write at time = timePhase + multiple of |frequency|
+#    averagingFreq  : frequency (in s) for periodic averaging interval
+#    averagingPhase : phase     (in s) for periodic averaging interval
+#    repeatCycle    : number of averaging intervals in 1 cycle
+#  levels(:,n) : list of levels to write to file (Notes: declared as REAL)
+#                (see "available_diagnostics.log" file for the full list of diags)
+#  missing_value(n) : missing value for real-type fields in output file "n"
+#  fileFlags(n)     : specific code (8c string) for output file "n"
+#--------------------
+# This example dumps EXF diagnostics as snapshot after 10 time-steps
+# Note: EXF air-sea fluxes over Sea-Ice are wrong
+ &DIAGNOSTICS_LIST
+   dumpAtLast  = .FALSE.,
+#--
+#  fields(1:8,1) = 'MXLDEPTH','ETAN    ','oceFWflx','oceQnet ','oceQsw  ','oceSflux','EXFempmr','EXFqnet ',
+  fields(1:5,1) = 'MXLDEPTH','ETAN    ','EXFroff ','EXFpreci','EXFevap',
+    fileName(1) = 'Surf',
+   frequency(1) = 2592000.,
+#2592000
+#
+  fields(1:6,2) = 'UVEL    ','VVEL    ','WVEL    ','THETA   ','SALT    ','RHOAnoma',
+    fileName(2) = 'Stat',
+   frequency(2) = 2592000.,
+#
+#  fields(1:5,3) = 'TFLUX ','SFLUX ','oceQsw ','WTHMASS ','WSLTMASS ',
+#    fileName(3) = 'TS_surf_flux',
+#   frequency(3) = 2592000.,
+
+#  fields(1:2,3)  = 'KPPhbl  ','KPPfrac ',
+#   fileName(3) = 'KPPSurf',
+#  frequency(3) =  -31104000.,
+
+#  fields(1:4,4)  = 'KPPghatK','KPPviscA','KPPdiffS','KPPdiffT',
+#   fileName(4) = 'KPPLevs',
+#  frequency(4) =  2592000.,
+  
+#  fields(1:7,4)  = 'ADVr_TH ','ADVx_TH ','ADVy_TH ','DFrE_TH ','DFxE_TH ','DFyE_TH ','DFrI_TH ',
+#   fileName(4) = 'PT_flux',
+#  frequency(4) =  2592000.,
+
+#  fields(1:7,5)  = 'ADVr_SLT ','ADVx_SLT ','ADVy_SLT ','DFrE_SLT ','DFxE_SLT ','DFyE_SLT ','DFrI_SLT ',
+#   fileName(5) = 'SLT_flux',
+#  frequency(5) =  2592000.,
+
+#  fields(1:2,6)  = 'KPPg_TH ','KPPg_SLT ',
+#   fileName(6) = 'KPP',
+#  frequency(6) =  2592000.,
+
+#  fields(1:2,7) = 'TOTTTEND ','TOTSTEND ',
+#   fileName(7) = 'TOT',
+#  frequency(7) = 2592000.,
+ 
+ &
+
+#--------------------
+# Parameter for Diagnostics of per level statistics:
+#--------------------
+#  diagSt_mnc (logical): write stat-diags to NetCDF files (default=diag_mnc)
+#  diagSt_regMaskFile : file containing the region-mask to read-in
+#  nSetRegMskFile   : number of region-mask sets within the region-mask file
+#  set_regMask(i)   : region-mask set-index that identifies the region "i"
+#  val_regMask(i)   : region "i" identifier value in the region mask
+#--for each output-stream:
+#  stat_fName(n) : prefix of the output file name (max 80c long) for outp.stream n
+#  stat_freq(n):< 0 : write snap-shot output every |stat_freq| seconds
+#               > 0 : write time-average output every stat_freq seconds
+#  stat_phase(n)    : write at time = stat_phase + multiple of |stat_freq|
+#  stat_region(:,n) : list of "regions" (default: 1 region only=global)
+#  stat_fields(:,n) : list of selected diagnostics fields (8.c) in outp.stream n
+#                (see "available_diagnostics.log" file for the full list of diags)
+#--------------------
+ &DIAG_STATIS_PARMS
+#stat_fields(1:5,1)  = 'ETAN    ','UVEL    ','VVEL    ','WVEL    ', 'THETA   ',
+# stat_fName(1) = 'dynStDiag',
+#  stat_freq(1) = -36000.,
+# stat_phase(1) = 0.,
+ &
+

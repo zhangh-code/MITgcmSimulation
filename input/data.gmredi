@@ -1,0 +1,7 @@
+# GMREDI parameters
+ &GM_PARM01
+  GM_background_K = 10.0,
+  GM_isopycK      = 10,
+  GM_taper_scheme = 'gkw91',
+  GM_maxSlope     = 1.e-2,
+ &

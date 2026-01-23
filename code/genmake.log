@@ -1,0 +1,94 @@
+
+running: look_for_makedepend()
+ --> set MAKEDEPEND=$(TOOLSDIR)/xmakedepend
+
+running: check_HAVE_CLOC()
+ running: get_fortran_c_namemangling()
+ mpicc -03 -xssse3 -ip -c genmake_test.c
+icc: command line warning #10006: ignoring unknown option '-03'
+ mpif90 -r8 -i4 -WB -convert big_endian -assume byterecl -mcmodel=medium -shared-intel -g -c genmake_tcomp.f
+ --> set FC_NAMEMANGLE='#define FC_NAMEMANGLE(X)  X ## _'
+mpicc -03 -xssse3 -ip -c genmake_tc_1.c
+icc: command line warning #10006: ignoring unknown option '-03'
+mpif90 -r8 -i4 -WB -convert big_endian -assume byterecl -mcmodel=medium -shared-intel -g -o genmake_tc genmake_tc_2.f genmake_tc_1.o
+  HELLO WORLD   1496236970.31640     
+ --> set HAVE_CLOC='t'
+
+running: check_HAVE_SETRLSTK()
+mpicc -03 -xssse3 -ip -c genmake_tc_1.c
+icc: command line warning #10006: ignoring unknown option '-03'
+      program hello
+      external setrlstk
+      call setrlstk()
+      end
+mpif90 -r8 -i4 -WB -convert big_endian -assume byterecl -mcmodel=medium -shared-intel -g -o genmake_tc genmake_tc_2.f genmake_tc_1.o
+ --> set HAVE_SETRLSTK='t'
+
+running: check_HAVE_SIGREG()
+mpicc -03 -xssse3 -ip -c genmake_tc_1.c
+icc: command line warning #10006: ignoring unknown option '-03'
+      program hello
+      integer anint
+      common /iv/ anint
+      external sigreg
+      call sigreg(anint)
+      end
+mpif90 -r8 -i4 -WB -convert big_endian -assume byterecl -mcmodel=medium -shared-intel -g -o genmake_tc genmake_tc_2.f genmake_tc_1.o
+ --> set HAVE_SIGREG='t'
+
+running: check_HAVE_STAT()
+mpicc -03 -xssse3 -ip -c genmake_tc_1.c
+      program hello
+      integer nbyte
+      call tfsize(nbyte)
+      print *," HELLO WORLD", nbyte
+      end
+mpif90 -r8 -i4 -WB -convert big_endian -assume byterecl -mcmodel=medium -shared-intel -g -o genmake_tc genmake_tc_2.f genmake_tc_1.o
+ --> set HAVE_STAT='t'
+
+running: check_netcdf_libs()
+===  genmake_tnc.F  >>>
+      program fgennc
+#include "netcdf.inc"
+      integer iret, ncid, xid
+      iret = nf_create('genmake_tnc.nc', NF_CLOBBER, ncid)
+      IF (iret .NE. NF_NOERR) write(*,*) NF_STRERROR(iret)
+      iret = nf_def_dim(ncid, 'X', 11, xid)
+      IF (iret .NE. NF_NOERR) write(*,*) NF_STRERROR(iret)
+      iret = nf_close(ncid)
+      IF (iret .NE. NF_NOERR) write(*,*) NF_STRERROR(iret)
+      end
+<<<  genmake_tnc.F  ===
+cat genmake_tnc.F |  /usr/bin/cpp -P -traditional -DALLOW_USE_MPI -DWORDLENGTH=4 -DALLOW_USE_MPI -DHAVE_SYSTEM -DHAVE_FDATE -DHAVE_ETIME_FCT -DHAVE_CLOC -DHAVE_SETRLSTK -DHAVE_SIGREG -DHAVE_STAT -I/public/software/mpi/mvapich2/2.2b/intel/include -I/public/software/mathlib/lapack/3.4.2/intel/include -I/public/software/mathlib/netcdf/4.4.1.1/intel/include -I/usr/include
+mpif90 -r8 -i4 -WB -convert big_endian -assume byterecl -mcmodel=medium -shared-intel -g -O3 -xssse3 -c genmake_tnc.f  \ 
+  &&  mpif90 -r8 -i4 -WB -convert big_endian -assume byterecl -mcmodel=medium -shared-intel -g -O3 -xssse3 -o genmake_tnc.o -L/public/software/mpi/mvapich2/2.2b/intel/lib -L/public/software/mathlib/lapack/3.4.2/intel/lib -L/public/software/mathlib/netcdf/4.4.1.1/intel/lib -L/usr/lib64
+genmake_tnc.o: In function `fgennc':
+/public/home/liuyi/MITgcm_c65y/verification/circulation/code/genmake_tnc.f:1743: undefined reference to `nf_create_'
+/public/home/liuyi/MITgcm_c65y/verification/circulation/code/genmake_tnc.f:1745: undefined reference to `nf_def_dim_'
+/public/home/liuyi/MITgcm_c65y/verification/circulation/code/genmake_tnc.f:1747: undefined reference to `nf_close_'
+/public/home/liuyi/MITgcm_c65y/verification/circulation/code/genmake_tnc.f:1748: undefined reference to `nf_strerror_'
+/public/home/liuyi/MITgcm_c65y/verification/circulation/code/genmake_tnc.f:1746: undefined reference to `nf_strerror_'
+/public/home/liuyi/MITgcm_c65y/verification/circulation/code/genmake_tnc.f:1744: undefined reference to `nf_strerror_'
+
+==> try again with added '-lnetcdf'
+cat genmake_tnc.F |  /usr/bin/cpp -P -traditional -DALLOW_USE_MPI -DWORDLENGTH=4 -DALLOW_USE_MPI -DHAVE_SYSTEM -DHAVE_FDATE -DHAVE_ETIME_FCT -DHAVE_CLOC -DHAVE_SETRLSTK -DHAVE_SIGREG -DHAVE_STAT -I/public/software/mpi/mvapich2/2.2b/intel/include -I/public/software/mathlib/lapack/3.4.2/intel/include -I/public/software/mathlib/netcdf/4.4.1.1/intel/include -I/usr/include > genmake_tnc.f \ 
+ &&  mpif90 -r8 -i4 -WB -convert big_endian -assume byterecl -mcmodel=medium -shared-intel -g -O3 -xssse3 -c genmake_tnc.f \ 
+ &&  mpif90 -r8 -i4 -WB -convert big_endian -assume byterecl -mcmodel=medium -shared-intel -g -O3 -xssse3 -o genmake_tnc genmake_tnc.o -L/public/software/mpi/mvapich2/2.2b/intel/lib -L/public/software/mathlib/lapack/3.4.2/intel/lib -L/public/software/mathlib/netcdf/4.4.1.1/intel/lib -L/usr/lib64 -lnetcdf
+genmake_tnc.o: In function `fgennc':
+/public/home/liuyi/MITgcm_c65y/verification/circulation/code/genmake_tnc.f:1743: undefined reference to `nf_create_'
+/public/home/liuyi/MITgcm_c65y/verification/circulation/code/genmake_tnc.f:1745: undefined reference to `nf_def_dim_'
+/public/home/liuyi/MITgcm_c65y/verification/circulation/code/genmake_tnc.f:1747: undefined reference to `nf_close_'
+/public/home/liuyi/MITgcm_c65y/verification/circulation/code/genmake_tnc.f:1748: undefined reference to `nf_strerror_'
+/public/home/liuyi/MITgcm_c65y/verification/circulation/code/genmake_tnc.f:1746: undefined reference to `nf_strerror_'
+/public/home/liuyi/MITgcm_c65y/verification/circulation/code/genmake_tnc.f:1744: undefined reference to `nf_strerror_'
+
+==> try again with added '-lnetcdff -lnetcdf'
+cat genmake_tnc.F |  /usr/bin/cpp -P -traditional -DALLOW_USE_MPI -DWORDLENGTH=4 -DALLOW_USE_MPI -DHAVE_SYSTEM -DHAVE_FDATE -DHAVE_ETIME_FCT -DHAVE_CLOC -DHAVE_SETRLSTK -DHAVE_SIGREG -DHAVE_STAT -I/public/software/mpi/mvapich2/2.2b/intel/include -I/public/software/mathlib/lapack/3.4.2/intel/include -I/public/software/mathlib/netcdf/4.4.1.1/intel/include -I/usr/include > genmake_tnc.f \ 
+ &&  mpif90 -r8 -i4 -WB -convert big_endian -assume byterecl -mcmodel=medium -shared-intel -g -O3 -xssse3 -c genmake_tnc.f \ 
+ &&  mpif90 -r8 -i4 -WB -convert big_endian -assume byterecl -mcmodel=medium -shared-intel -g -O3 -xssse3 -o genmake_tnc genmake_tnc.o -L/public/software/mpi/mvapich2/2.2b/intel/lib -L/public/software/mathlib/lapack/3.4.2/intel/lib -L/public/software/mathlib/netcdf/4.4.1.1/intel/lib -L/usr/lib64 -lnetcdf
+check_netcdf: successful
+ --> set HAVE_NETCDF='t'
+
+running: check_HAVE_FLUSH()
+  check_HAVE_FLUSH: successful
+ --> set HAVE_FLUSH='t'

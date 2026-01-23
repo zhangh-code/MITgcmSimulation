@@ -1,0 +1,89 @@
+# Open-boundaries
+ &OBCS_PARM01
+# This flag turns off checking and fixing problematic topography across 
+# open boundaries.
+ OBCSfixTopo=.TRUE.,
+ OB_Jnorth= 2280*-1,
+ OB_Jsouth= 2280*1,
+ OB_Ieast = 600*-1,
+ OB_Iwest = 600*1,
+ 
+ useOBCSprescribe = .TRUE.,
+
+ useOBCSbalance =.TRUE.,
+ OBCS_balanceFacE = 1.,
+ OBCS_balanceFacW = 1.,
+ OBCS_balanceFacN = 1.,
+ OBCS_balanceFacS = 1.,
+
+ useOBCSsponge =.FALSE.,
+
+# useOrlanskiNorth =.FALSE.,
+# useOrlanskiEast  =.FALSE.,
+# useOrlanskiWest  =.FALSE.,
+# useOrlanskiSouth =.TRUE.,
+
+ OBNuFile = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/OBCS/North_u_glorys12v1_1993-2022.bin12',
+ OBSuFile = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/OBCS/South_u_glorys12v1_1993-2022.bin12',
+ OBWuFile = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/OBCS/West_u_glorys12v1_1993-2022.bin12',
+ OBEuFile = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/OBCS/East_u_glorys12v1_1993-2022.bin12',
+
+ OBNvFile = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/OBCS/North_v_glorys12v1_1993-2022.bin12',
+ OBSvFile = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/OBCS/South_v_glorys12v1_1993-2022.bin12',
+ OBWvFile = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/OBCS/West_v_glorys12v1_1993-2022.bin12',
+ OBEvFile = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/OBCS/East_v_glorys12v1_1993-2022.bin12',
+
+ OBNtFile = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/OBCS/North_temp_glorys12v1_1993-2022.bin12',
+ OBStFile = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/OBCS/South_temp_glorys12v1_1993-2022.bin12',
+ OBWtFile = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/OBCS/West_temp_glorys12v1_1993-2022.bin12',
+ OBEtFile = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/OBCS/East_temp_glorys12v1_1993-2022.bin12',
+
+ OBNsFile = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/OBCS/North_salt_glorys12v1_1993-2022.bin12',
+ OBSsFile = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/OBCS/South_salt_glorys12v1_1993-2022.bin12',
+ OBWsFile = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/OBCS/West_salt_glorys12v1_1993-2022.bin12',
+ OBEsFile = '/work/home/zhanghua1504/MITgcm_c65y/verification/circulation/input/OBCS/East_salt_glorys12v1_1993-2022.bin12',
+ 
+# OBNetaFile = 'North_ssh_HYCOM.bin12',
+# OBSetaFile = 'South_ssh_HYCOM.bin12',
+# OBWetaFile = 'West_ssh_HYCOM.bin12',
+# OBEetaFile = 'East_ssh_HYCOM.bin12',
+
+ OBCS_monitorFreq= 86400.,
+ OBCS_monSelect = 1,
+ &
+ useOBCStides = .FALSE.,
+#components   = M2       S2     N2       K2       K1      O1       P1       Q1       Mf         Mm
+#periods (hr) = 12.4206  12     12.6583  11.9672  23.9345 25.8193  24.0659  26.8684  327.8599   661.31
+ tidalPeriod  = 44714.16,43200.,45569.88,43081.92,86164.2,92949.48,86637.24,96726.24,1180295.64,2380716.,
+# OBWamFile='WestAM_8Tu.bin1290',
+# OBWphFile='WestPH_8Tu.bin1290',
+# OBEamFile='EastAM_8Tu.bin1290',
+# OBEphFile='EastPH_8Tu.bin1290',
+# OBNamFile='NorthAM_8Tv.bin1290',
+# OBNphFile='NorthPH_8Tv.bin1290',
+# OBSamFile='SouthAM_8Tv.bin1290',
+# OBSphFile='SouthPH_8Tv.bin1290',
+ 
+# Orlanski parameters
+ &OBCS_PARM02
+#Cmax=0.45,
+#cVelTimeScale=2000.,
+#useFixedCEast=.FALSE.,
+#useFixedCWest=.FALSE.,
+ &
+
+# Sponge parameters
+ &OBCS_PARM03
+ Urelaxobcsinner = 86400.,
+ Urelaxobcsbound = 86400.,
+ Vrelaxobcsinner = 86400.,
+ Vrelaxobcsbound = 86400.,
+ spongeThickness = 9,
+ &
+
+# Stevens parameters
+ &OBCS_PARM04
+# TrelaxStevens = 86400.,
+# SrelaxStevens = 86400.,
+ &
+
