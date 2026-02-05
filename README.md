@@ -1,6 +1,6 @@
 ## Circulation Simulation
 
-![3D plot](./pics/MIT3Dskip_deseasoned.gif) 
+![3D plot](./pics/MIT3Dskip_deseasoned_.gif) 
 
 # Introduction
 
